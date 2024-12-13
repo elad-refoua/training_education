@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --secondary: #4299e1;
+            --accent: #63B3ED;
+            --background: #f8fafc;
+            --text: #2d3748;
+        }
+        
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .main-header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .logos {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 20px 0;
+        }
+
+        .logo-placeholder {
+            width: 120px;
+            height: 120px;
+            background-color: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            color: var(--primary);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-placeholder:hover {
+            transform: translateY(-5px);
+        }
+
+        .progress-container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary) 0%, var(--accent) 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .exercise-container {
+            background: white;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .exercise-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .exercise-header {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 20px 20px 0 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .exercise-number {
+            background-color: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-left: 15px;
+        }
+
+        .exercise-content {
+            display: none;
+            padding: 30px;
+        }
+
+        .task-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f8fafc;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .task-item:hover {
+            background: #f1f5f9;
+        }
+
+        .task-checkbox {
+            margin-left: 15px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .ai-links {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .ai-button {
+            display: inline-block;
+            padding: 12px 30px;
+            margin: 0 10px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .ai-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-header">
+        <div class="logos">
+            <div class="logo-placeholder">
+                <img src="https://upload.wikimedia.org/wikipedia/he/thumb/1/15/Ministry_of_Education.svg/1365px-Ministry_of_Education.svg.png" alt="משרד החינוך" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+            </div>
+            <div class="logo-placeholder">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/%D7%9C%D7%95%D7%92%D7%95_%D7%90%D7%99%D7%92%D7%95%D7%93_%D7%9E%D7%A8%D7%9B%D7%96%D7%99_%D7%94%D7%A1%D7%99%D7%95%D7%A2_%D7%9C%D7%A0%D7%A4%D7%92%D7%A2%D7%95%D7%AA_%D7%95%D7%9C%D7%A0%D7%A4%D7%92%D7%A2%D7%99_%D7%AA%D7%A7%D7%99%D7%A4%D7%94_%D7%9E%D7%99%D7%A0%D7%99%D7%AA_%282023%29.jpg/1200px-%D7%9C%D7%95%D7%92%D7%95_%D7%90%D7%99%D7%92%D7%95%D7%93_%D7%9E%D7%A8%D7%9B%D7%96%D7%99_%D7%94%D7%A1%D7%99%D7%95%D7%A2_%D7%9C%D7%A0%D7%A4%D7%92%D7%A2%D7%95%D7%AA_%D7%95%D7%9C%D7%A0%D7%A4%D7%92%D7%A2%D7%99_%D7%AA%D7%A7%D7%99%D7%A4%D7%94_%D7%9E%D7%99%D7%A0%D7%99%D7%AA_%282023%29.jpg" alt="איגוד מרכזי הסיוע" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+            </div>
+            <div class="logo-placeholder">
+                <img src="https://static.wixstatic.com/media/38a166_7a967551f21a4270af2d99ed04e3f04b~mv2.png/v1/fill/w_526,h_110,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/38a166_7a967551f21a4270af2d99ed04e3f04b~mv2.png" alt="לוגו השלישי המלאכותי" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+            </div>
+        </div>
+        <h1>תרגילי היכרות עם בינה מלאכותית ליועצות ארציות בתחום המיניות</h1>
+        <div class="subtitle">תכנית הכשרה מקצועית בשיתוף משרד החינוך ואיגוד מרכזי הסיוע</div>
+    </div>
+
+    <div class="exercise-container">
+        <div class="exercise-header" onclick="toggleContent(1)">
+            <div><span class="exercise-number">1</span>בדיקת ריצוי</div>
+        </div>
+        <div class="exercise-content" id="content1">
+            <h3>הנחיות לתרגיל:</h3>
+            <div class="task-list">
+                <div class="task-item">
+                    <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    <span>ספרי לבינה המלאכותית על מקרה שהתמודדת איתו בייעוץ לצוות החינוכי בנושא חינוך מיני</span>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    <span>בקשי משוב מהבינה המלאכותית על ההדרכה והייעוץ שנתת</span>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    <span>לאחר קבלת המשוב, אמרי לה שהמשוב שלה לא נכון לגביך. בדקי כיצד היא עכשיו משנה את דעתה</span>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    <span>נסי לנהל דיאלוג סביב תמה זו ובדקי את גבולות הריצוי עד לאן הם מגיעים</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="exercise-container">
+        <div class="exercise-header" onclick="toggleContent(2)">
+            <div><span class="exercise-number">2</span>בדיקת גבולות</div>
+        </div>
+        <div class="exercise-content" id="content2">
+            <h3>הנחיות לתרגיל:</h3>
+            <div class="task-list">
+                <div class="task-item">
+                    <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    <span>בחרי נושא שנוי במחלוקת בתחום החינוך המיני בו נדרשת הדרכה והנחייה של הצוות החינוכי</span>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    <span>שאלי את הבינה המלאכותית את דעתה בנושא</span>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    <span>נסי לאתגר את גבולותיה הערכיים של הבינה המלאכותית</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="exercise-container">
+        <div class="exercise-header" onclick="toggleContent(3)">
+            <div><span class="exercise-number">3</span>ניתוח מאמר</div>
+        </div>
+        <div class="exercise-content" id="content3">
+            <h3>הנחיות לתרגיל:</h3>
+            <div class="task-list">
+                <div class="task-item">
+                    <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    <span>בחרי מאמר מקצועי בתחום הייעוץ וההדרכה בנושאי מיניות במערכת החינוך</span>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    <span>חלצי ממנו 3 נקודות מרכזיות</span>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    <span>השתמשי בנקודות אלו על מנת לבחון דילמה מקצועית רלוונטית</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="exercise-container">
+        <div class="exercise-header" onclick="toggleContent(4)">
+            <div><span class="exercise-number">4</span>בדיקת מהימנות של AI</div>
+        </div>
+        <div class="exercise-content" id="content4">
+            <h3>הנחיות לתרגיל:</h3>
+            <div class="task-list">
+                <div class="task-item">
+                    <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    <span>בחרי תחום תוכן בו את מרגישה מומחית בייעוץ והדרכת צוותים בנושאי מיניות</span>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    <span>בקשי מהבינה המלאכותית לכתוב לך סיכום בנושא, כולל פרטים ספציפיים ומקורות</span>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    <span>נסי לזהות נקודות טעות או עיוורון, ונסי "לשבור את המכונה"</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="exercise-container">
+        <div class="exercise-header" onclick="toggleContent(5)">
+            <div><span class="exercise-number">5</span>ייעוץ אתי בתחום המיני</div>
+        </div>
+        <div class="exercise-content" id="content5">
+            <h3>הנחיות לתרגיל:</h3>
+            <div class="task-list">
+                <div class="task-item">
+                    <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    <span>בחרי סוגיה אתית שמעסיקה אותך בתפקידך כיועצת ארצית בתחום המיניות</span>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    <span>בקשי מהבינה המלאכותית לעזור לך לנתח את המקרה מזוויות שונות</span>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    <span>בקשי ממנה לבנות איתך תכנית עבודה והדרכה הכוללת את השיקולים האתיים</span>
+                </div>
+                <div class="task-item">
+                    <input type="checkbox" class="task-checkbox" onchange="updateProgress()">
+                    <span>נסי "לשבור את המכונה" ולראות איך היא מגיבה כשאת מציגה דילמות אתיות מורכבות בתחום</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="progress-container">
+        <h3>התקדמות</h3>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+        <div id="progressText" style="text-align: center; margin-top: 10px;"></div>
+    </div>
+
+    <div class="ai-links">
+        <a href="https://claude.ai" class="ai-button">Claude - Anthropic</a>
+        <a href="https://chat.openai.com" class="ai-button">ChatGPT - OpenAI</a>
+    </div>
+
+    <script>
+        function toggleContent(num) {
+            const content = document.getElementById('content' + num);
+            const currentDisplay = content.style.display;
+            content.style.display = currentDisplay === 'block' ? 'none' : 'block';
+        }
+
+        function updateProgress() {
+            const totalTasks = document.querySelectorAll('.task-checkbox').length;
+            const completedTasks = document.querySelectorAll('.task-checkbox:checked').length;
+            const progressPercentage = (completedTasks / totalTasks) * 100;
+            
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            
+            progressBar.style.width = progressPercentage + '%';
+            progressText.textContent = `${completedTasks} מתוך ${totalTasks} משימות הושלמו (${Math.round(progressPercentage)}%)`;
+            
+            // Save progress to local storage
+            const checkboxStates = Array.from(document.querySelectorAll('.task-checkbox')).map(cb => cb.checked);
+            localStorage.setItem('exerciseProgress', JSON.stringify(checkboxStates));
+        }
+
+        // Load saved progress on page load
+        window.onload = function() {
+            const savedProgress = localStorage.getItem('exerciseProgress');
+            if (savedProgress) {
+                const checkboxStates = JSON.parse(savedProgress);
+                const checkboxes = document.querySelectorAll('.task-checkbox');
+                checkboxes.forEach((checkbox, index) => {
+                    checkbox.checked = checkboxStates[index];
+                });
+                updateProgress();
+            }
+        }
+    </script>
+</body>
+</html>
